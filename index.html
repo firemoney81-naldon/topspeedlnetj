@@ -1,23 +1,605 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "동작구인터넷 가입센터",
+      "url": "https://yourdomain.com",
+      "areaServed": "대한민국 서울특별시 동작구 전역",
+      "provider": {
+        "@type": "Organization",
+        "name": "동작구인터넷 전문 비교 업체",
+        "url": "https://yourdomain.com",
+        "description": "동작구 지역 기반의 인터넷, TV, 전화 상품 비교 및 컨설팅 서비스 제공"
+      },
+      "description": "서울 동작구 지역에 최적화된 SKT, KT, LG U+ 등 주요 통신사 인터넷 요금제를 비교하고, 최대 현금지원 사은품 혜택을 안내하는 전문 플랫폼입니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "인터넷 가입 상품 종류",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "초고속 인터넷 100Mbps"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "22000",
+                "priceCurrency": "KRW",
+                "description": "3년 약정 기준 월 기본 요금 (VAT 포함)"
+            },
+            "description": "웹 서핑, 이메일, 일반적인 스트리밍에 적합한 경제적인 요금제"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "기가 인터넷 500Mbps"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "33000",
+                "priceCurrency": "KRW",
+                "description": "3년 약정 기준 월 기본 요금 (VAT 포함)"
+            },
+            "description": "온라인 게임, 고화질 동영상 시청, 여러 명이 동시에 사용하기에 적합"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "기가 인터넷 1Gbps"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "38500",
+                "priceCurrency": "KRW",
+                "description": "3년 약정 기준 월 기본 요금 (VAT 포함)"
+            },
+            "description": "최대 속도와 안정성이 필요한 전문 작업, 대용량 파일 전송에 최적"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "인터넷 + TV 결합 상품"
+            },
+            "description": "인터넷과 IPTV를 함께 가입하여 할인 혜택을 받는 상품"
+          }
+        ]
+      }
+    }
+    </script>
+
+  <style>
+    body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8;
+        background-color: #f0f4f8; /* 부드러운 배경색 */
+        color: #333;
+        word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+    }
+
+    /* 상단 헤더 */
+    header {
+        background-color: #004d99; /* 더 깊은 파란색 */
+        color: white;
+        padding: 2.5rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0.5rem 0 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        margin: 0;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    nav a:hover {
+        color: #ffe066; /* 밝은 노란색 */
+        transform: translateY(-2px);
+    }
+
+    /* 본문 영역 */
+    main {
+        max-width: 1000px;
+        margin: 2.5rem auto;
+        padding: 0 1.5rem;
+        background-color: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+    }
+
+    h1, h2 {
+        color: #003366; /* 진한 남색 */
+        font-weight: 700;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-bottom: 3px solid #e0f0ff;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        color: #004d99;
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    p {
+        text-align: justify;
+        margin-bottom: 1.5rem;
+    }
+
+    /* 테이블 스타일 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+        padding: 1.2rem;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+    }
+
+    th {
+        background-color: #004d99;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8f8f8;
+    }
+
+    /* FAQ 아코디언 */
+    dl dt {
+        font-weight: 700;
+        margin-top: 1.5rem;
+        cursor: pointer;
+        color: #0066cc;
+        background-color: #f5fafd;
+        padding: 1rem;
+        border-left: 5px solid #0066cc;
+        transition: background-color 0.3s ease;
+        border-radius: 4px;
+    }
+
+    dl dt:hover {
+        background-color: #e6f2ff;
+    }
+
+    dl dd {
+        margin: 0.5rem 0 1.5rem 1rem;
+        padding-left: 1rem;
+        border-left: 2px dashed #ccc;
+        display: none;
+    }
+
+    dl dt.active + dd {
+        display: block;
+    }
+
+    /* CTA 버튼 */
+    .cta-button {
+        display: inline-block;
+        background-color: #ff6600;
+        color: white;
+        font-weight: 700;
+        padding: 1rem 3rem;
+        border-radius: 50px;
+        text-decoration: none;
+        margin: 2rem 0;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button:hover {
+        background-color: #e65c00;
+        transform: translateY(-2px);
+    }
+
+    /* 키워드 태그 */
+    .keyword-tags {
+        margin: 2rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .keyword-tags a {
+        background-color: #e0f0ff;
+        color: #0066cc;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .keyword-tags a:hover {
+        background-color: #b3d1ff;
+        transform: scale(1.05);
+    }
+
+    /* 푸터 */
+    footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+        background-color: #e0eaf1;
+        margin-top: 3rem;
+        border-top: 1px solid #d0dbe4;
+    }
+
+    /* 외부 링크 */
+    .external-link {
+        display: inline-block;
+        color: #0066cc;
+        font-weight: 500;
+        margin-top: 1rem;
+        text-decoration: underline;
+    }
+
+    /* 이미지 스타일 */
+    .full-width-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 2rem 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .image-caption {
+        font-size: 0.9rem;
+        color: #666;
+        text-align: center;
+        margin-top: -1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    /* 폼 영역 */
+    .form-section {
+        background-color: #f9f9f9;
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        border: 1px solid #ddd;
+    }
+
+    .form-section h3 {
+        color: #004d99;
+        margin-top: 0;
+    }
+
+    .form-section label {
+        display: block;
+        font-weight: 500;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-section input[type="text"],
+    .form-section select {
+        width: calc(100% - 2rem);
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .form-section button {
+        background-color: #007bff;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 1.5rem;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-section button:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>동작구인터넷 가입센터 - SKT, KT, LG 요금 비교 및 사은품 혜택 분석</h1>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#인터넷서비스">서비스 소개</a></li>
+        <li><a href="#요금제비교">요금제 비교</a></li>
+        <li><a href="#가입절차">가입 절차</a></li>
+        <li><a href="#자주묻는질문">자주 묻는 질문</a></li>
+        <li><a href="#상담신청">상담 신청</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
+  </header>
+
+  <main>
+    <section id="인터넷서비스">
+      <h2>동작구인터넷 가입, 왜 비교해야 할까요?</h2>
+      <p>저희 **동작구인터넷 가입센터**는 서울특별시 동작구 지역 주민들을 위한 전문적인 인터넷 서비스 비교 플랫폼입니다. **동작구** 지역은 아파트 단지부터 다세대 주택, 원룸 밀집 지역까지 다양한 주거 형태가 혼재되어 있어, 어떤 통신사의 인터넷을 선택하느냐에 따라 **인터넷 속도**와 **인터넷 비용**이 크게 달라질 수 있습니다. 고객님의 주거 환경과 사용 패턴을 정확히 분석하여 **SKT, KT, LG U+** 등 주요 통신사의 요금제와 **현금 사은품 혜택**을 투명하게 비교해 드립니다.</p>
+
+      <div class="keyword-tags" aria-label="연관 검색 키워드">
+        <a href="#요금제비교">동작구 인터넷 가격</a>
+        <a href="#가입절차">인터넷 설치 비용</a>
+        <a href="#요금제비교">SKT 인터넷</a>
+        <a href="#요금제비교">KT 인터넷</a>
+        <a href="#요금제비교">LG U+ 인터넷</a>
+        <a href="#요금제비교">기가 인터넷</a>
+        <a href="#요금제비교">인터넷 TV 결합</a>
+        <a href="#요금제비교">인터넷 현금 지원</a>
+        <a href="#요금제비교">인터넷 사은품 순위</a>
+        <a href="#인터넷서비스">동작구 원룸 인터넷</a>
+        <a href="#요금제비교">동작구 인터넷 싼곳</a>
+        <a href="#인터넷서비스">사당동 인터넷</a>
+        <a href="#인터넷서비스">상도동 인터넷</a>
+        <a href="#인터넷서비스">흑석동 인터넷</a>
+        <a href="#인터넷서비스">노량진 인터넷</a>
+        <a href="#인터넷서비스">신대방동 인터넷</a>
+        <a href="#인터넷서비스">대방동 인터넷</a>
+      </div>
+
+      <p>최근에는 **AI 기술**의 발전으로 인터넷 사용량이 급증하고 있습니다. 특히 넷플릭스, 유튜브 등 OTT 서비스의 보편화와 재택근무 증가로 인해 **고속 인터넷**의 필요성이 커지고 있습니다. 하지만 많은 고객님들이 복잡한 요금제와 수많은 할인 혜택에 혼란을 느끼십니다. **네이버 검색**이나 **구글 검색**을 통해 인터넷 가입 정보를 찾아보지만, 광고성 정보가 많아 신뢰하기 어렵습니다. 저희 플랫폼은 **AI 에이전트 크롤링**을 통해 실시간 요금 정보를 수집하고, **챗지피티(ChatGPT)**와 **제미나이(Gemini)**와 같은 **AI** 모델이 분석한 데이터 기반으로 맞춤형 요금제를 추천합니다. 이는 단순히 **인터넷 가격**이 저렴한 곳을 찾는 것을 넘어, 고객님의 사용 패턴에 최적화된 상품을 찾아내는 데 중점을 둡니다. </p>
+      <img src="https://images.pexels.com/photos/4126780/pexels-photo-4126780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="동작구인터넷 설치 이미지" class="full-width-image">
+      <p class="image-caption">동작구 지역의 인터넷 설치 및 케이블 연결 작업 모습 (이미지 출처: Pexels.com)</p>
+      <p>저희는 **동작구** 지역에서 활동하는 수많은 통신사 대리점 중에서 **실제 고객 후기**와 **만족도 순위**를 기반으로 믿을 수 있는 업체를 엄선합니다. 특히 **인터넷 사은품**이나 **현금지원** 혜택이 중요하지만, 이 부분이 불투명한 경우가 많습니다. 저희는 **한국소비자원**의 소비자 보호 규정을 준수하며, 투명한 **현금지원 금액**을 약속합니다. **인터넷 가입** 시 **가입 혜택**으로 제공되는 **사은품**과 **지원금**을 최대로 받을 수 있도록 도와드리며, 고객님 한 분 한 분의 상황에 맞는 맞춤형 상담을 제공합니다.</p>
+
+      <h3>동작구 지역별 인터넷 환경 분석 (2026년 기준)</h3>
+      <p>동작구는 대규모 아파트 단지가 밀집한 **사당동**, **상도동**, **흑석동** 지역과 상대적으로 다세대, 원룸이 많은 **노량진동**, **신대방동**, **대방동** 지역으로 나눌 수 있습니다. 아파트 단지는 통신 인프라가 잘 갖춰져 있어 기가 인터넷 설치에 용이하며, 통신사 간의 경쟁도 치열하여 **인터넷 요금** 및 **사은품** 혜택이 좋습니다. 반면, 다세대 주택이나 원룸이 많은 지역은 댁내 배선 문제로 인해 기가 인터넷 설치가 제한될 수 있으며, **인터넷 설치 비용**이 추가될 수 있습니다. 저희는 이러한 지역별 특성을 고려하여 **인터넷 추천**을 진행하며, **원룸 인터넷 가입**을 원하는 고객님께도 최적의 솔루션을 제공합니다.</p>
+
+    </section>
+
+    <section id="요금제비교">
+      <h2>SKT, KT, LG U+ 인터넷 요금제 및 사은품 비교 분석</h2>
+      <p>**인터넷 가격**은 통신사별로 큰 차이가 없다고 생각할 수 있지만, **인터넷 TV 결합** 상품이나 **가족 결합 할인**을 어떻게 적용하느냐에 따라 실제 **월평균 요금**이 크게 달라집니다. 특히 **현금지원** 혜택은 대리점마다 천차만별이므로 꼼꼼한 **가격 비교**가 필수입니다. 아래는 2026년도 **동작구인터넷** 가입 시 고려해야 할 주요 통신사별 요금제와 **사은품** 혜택을 비교한 표입니다.</p>
+
+      <h3>주요 통신사별 인터넷 요금제 비교 (2026년 기준)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>SKT (SK브로드밴드)</th>
+            <th>KT (올레)</th>
+            <th>LG U+ (유플러스)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>인터넷 속도</strong></td>
+            <td>100Mbps ~ 10Gbps</td>
+            <td>100Mbps ~ 10Gbps</td>
+            <td>100Mbps ~ 10Gbps</td>
+          </tr>
+          <tr>
+            <td><strong>대표 요금제 (월)</strong></td>
+            <td>기가 라이트 (500M): 33,000원</td>
+            <td>기가 인터넷 (500M): 33,000원</td>
+            <td>스마트 광랜 (500M): 33,000원</td>
+          </tr>
+          <tr>
+            <td><strong>특징 및 장점</strong></td>
+            <td>SKT 휴대폰 결합 할인(온가족 할인) 혜택이 강력함. 유무선 통합 상품이 다양함.</td>
+            <td>안정적인 네트워크 품질. 넓은 커버리지. 통신사 본사 직영 관리가 체계적임.</td>
+            <td>인터넷 TV 결합 상품이 다양하고, 콘텐츠(넷플릭스 등) 제휴 혜택이 좋음.</td>
+          </tr>
+          <tr>
+            <td><strong>추천 대상</strong></td>
+            <td>SKT 휴대폰 사용 고객 및 가족 구성원.</td>
+            <td>안정성을 최우선으로 생각하는 고객.</td>
+            <td>다양한 채널과 콘텐츠를 즐기는 고객.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>*위 표의 요금은 3년 약정 기준이며, VAT 포함 가격입니다. 실제 **인터넷 가입** 시 **가족 결합 할인** 및 **제휴 카드 할인** 등에 따라 최종 **월평균 요금**은 달라질 수 있습니다.</p>
+
+      <h3>인터넷 사은품 및 현금지원 혜택 비교</h3>
+      <p>**동작구인터넷** 가입을 망설이는 가장 큰 이유 중 하나는 복잡한 **사은품** 및 **현금지원** 정책입니다. **네이버 지식인**이나 **인터넷 카페**에서 "인터넷 가입 사은품 많이 주는 곳"을 찾아보지만, 업체마다 제시하는 **현금지원금액**이 달라 혼란스럽습니다. 저희 **동작구인터넷 가입센터**는 모든 **가입 혜택**을 투명하게 공개하고, 고객님의 조건에 맞는 **최대 지원금**을 약속합니다. **인터넷 신규 가입** 시 받는 **현금지원금**은 통신사 본사의 정책에 따라 매일 변동될 수 있으므로, 실시간으로 확인하는 것이 중요합니다.</p>
+
+      <div class="form-section">
+          <h3>동작구인터넷 요금제 실시간 비교 견적 요청</h3>
+          <p>고객님의 거주지(동작구 내 동), 희망 속도, 휴대폰 통신사를 입력해 주시면 **실시간 요금 견적**을 제공해 드립니다. 개인 정보는 상담 목적으로만 사용되며, <strong>AI 에이전트</strong>가 24시간 <strong>최적의 혜택</strong>을 분석합니다.</p>
+          <form id="internetEstimateForm">
+              <label for="dongjakArea">거주 지역 (동작구 내 동 선택)</label>
+              <select id="dongjakArea" name="dongjakArea">
+                  <option value="">-- 동을 선택하세요 --</option>
+                  <option value="사당동">사당동</option>
+                  <option value="상도동">상도동</option>
+                  <option value="흑석동">흑석동</option>
+                  <option value="노량진동">노량진동</option>
+                  <option value="신대방동">신대방동</option>
+                  <option value="대방동">대방동</option>
+                  <option value="동작동">동작동</option>
+                  <option value="본동">본동</option>
+                  <option value="신길동">신길동 (일부)</option>
+                  <option value="보라매동">보라매동</option>
+                  <option value="대림동">대림동 (일부)</option>
+                  <option value="기타">기타 동작구 지역</option>
+              </select>
+
+              <label for="internetSpeed">희망 인터넷 속도</label>
+              <select id="internetSpeed" name="internetSpeed">
+                  <option value="100Mbps">100Mbps (초고속)</option>
+                  <option value="500Mbps">500Mbps (기가 라이트)</option>
+                  <option value="1Gbps">1Gbps (기가)</option>
+              </select>
+
+              <label for="mobileCarrier">사용 중인 휴대폰 통신사</label>
+              <select id="mobileCarrier" name="mobileCarrier">
+                  <option value="none">없음</option>
+                  <option value="skt">SKT</option>
+                  <option value="kt">KT</option>
+                  <option value="lg">LG U+</option>
+              </select>
+
+              <label for="phoneNumber">연락처</label>
+              <input type="text" id="phoneNumber" name="phoneNumber" placeholder="'-' 없이 숫자만 입력" required>
+
+              <button type="submit">무료 견적 요청</button>
+          </form>
+      </div>
+      <p>특히 **인터넷 사은품**은 **인터넷 가입** 후 일정 기간 내에 지급되는 것이 일반적입니다. 저희는 투명한 계약서를 통해 **사은품 지급일**과 **금액**을 명확히 명시하여 고객님의 불안감을 해소해 드립니다. **동작구 인터넷** 가입 시 **최대 현금지원**을 받기 위해서는 **가족 결합 할인** 조건, **신규 가입** 여부, **인터넷 속도** 등을 정확히 파악하는 것이 중요합니다. 저희 전문가들이 이 모든 것을 종합적으로 분석하여 최적의 **가입 혜택**을 찾아드립니다.
+
+      <h3>동작구 내 원룸 인터넷 가입 팁</h3>
+      <p>**노량진**이나 **상도동** 등 원룸촌이 많은 지역의 경우, **인터넷 요금**이 부담될 수 있습니다. **원룸 인터넷 가입** 시에는 100Mbps 상품만으로도 충분한 경우가 많습니다. 불필요하게 높은 속도의 기가 인터넷을 선택하기보다, 100Mbps 상품에 **TV 결합**을 하여 **월평균 요금**을 절감하는 것이 현명한 선택일 수 있습니다. 또한, 건물주가 단체로 가입한 **단체 인터넷**이 설치되어 있는지 확인하는 것도 중요합니다. 이 경우 **인터넷 설치 비용**이 절약되지만, 통신사 선택의 폭이 좁아질 수 있습니다. 저희는 **원룸 인터넷**에 특화된 요금제와 **장단점**을 상세히 비교하여 안내해 드립니다.</p>
+    </section>
+
+    <section id="가입절차">
+      <h2>성공적인 인터넷 가입을 위한 단계별 절차</h2>
+      <p>**동작구인터넷 가입센터**를 통한 인터넷 가입 절차는 매우 간단합니다. 복잡한 서류나 절차 없이, 고객님은 상담 신청만 하시면 나머지는 저희가 처리해 드립니다. 투명하고 신속한 가입 절차를 통해 최단 시간 내에 **인터넷 설치**를 완료해 드립니다.</p>
+
+      <h3>1. 상담 신청 및 요금제 추천</h3>
+      <p>홈페이지 또는 전화로 상담을 신청하시면, 전문 상담사가 연락을 드립니다. 고객님의 거주 환경(동작구 사당동 아파트, 상도동 원룸 등), 휴대폰 통신사, 희망 **인터넷 속도**(100Mbps, 500Mbps, 1Gbps), **인터넷 TV 결합** 여부 등을 파악합니다. 수많은 **인터넷 요금제** 중에서 고객님에게 가장 많은 **현금지원**과 **월 요금 할인**을 제공하는 **최적의 상품**을 추천해 드립니다. 저희는 통신사별 **장점**과 **단점**, **차이점**을 명확히 설명해 드려 고객님이 쉽게 이해할 수 있도록 합니다.</p>
+
+      <h3>2. 계약 및 서류 확인</h3>
+      <p>추천받은 요금제를 선택하시면, 계약서 작성을 진행합니다. 계약서에는 **인터넷 비용**, **인터넷 설치 비용**, **사은품 지급 금액** 및 **지급일**, **약정 기간**, **위약금 규정** 등이 명확하게 명시되어야 합니다. 특히 **신규 가입** 시 제공되는 **사은품**과 **현금지원** 혜택은 **공정거래위원회**의 가이드라인에 따라 투명하게 처리되어야 합니다. 저희는 고객님이 계약서 내용을 꼼꼼히 확인할 수 있도록 안내하며, **추가 비용**이 발생하지 않도록 사전 고지합니다.</p>
+
+      <h3>3. 설치 기사 배정 및 현장 방문 설치</h3>
+      <p>계약이 완료되면, 해당 통신사 본사에서 **동작구** 지역 전문 설치 기사님이 배정됩니다. 기사님은 고객님과 협의하여 **인터넷 설치** 일정을 확정합니다. 설치 당일 방문하여 인터넷 개통 및 공유기, 셋톱박스 설치를 진행합니다. 이 때 **인터넷 속도 측정**을 통해 약정 속도가 제대로 나오는지 확인하는 것이 중요합니다. **동작구 노량진동**이나 **상도동**의 일부 오래된 주택의 경우, 댁내 광케이블 공사가 필요할 수 있으며, 이 부분은 방문 견적 시 사전에 안내해 드립니다.</p>
+
+      <h3>4. 사은품 지급 및 사후 관리</h3>
+      <p>**인터넷 설치**가 완료된 후, 약속된 일정에 맞춰 **현금 사은품**이 고객님 계좌로 지급됩니다. 저희는 **네이버**나 **구글** 검색 결과에서 볼 수 있는 허위 광고와 달리, 약속된 **지원금**을 100% 지급합니다. 또한, **인터넷** 사용 중 문제 발생 시, 통신사 고객센터 연결이 원활하도록 사후 관리 서비스를 제공합니다. **동작구인터넷 가입** 이후에도 고객 만족을 최우선으로 합니다.</p>
+
+      <a href="https://www.kcc.go.kr/web/main/index.do" target="_blank" rel="noopener noreferrer" class="external-link">방송통신위원회 홈페이지에서 소비자 피해 구제 규정 확인하기</a>
+    </section>
+
+    <section id="인터넷팁">
+      <h2>인터넷 가입 전 필수로 알아야 할 꿀팁 (2026년 최신 정보)</h2>
+      <p>**동작구인터넷** 가입 시 현명한 소비자가 되기 위한 몇 가지 핵심 팁을 알려드립니다. 이 팁들을 활용하면 **인터넷 비용**을 크게 절약하고 **사은품 혜택**을 극대화할 수 있습니다.</p>
+
+      <h3>✅ 가족 결합 할인 혜택 확인은 필수!</h3>
+      <p>**SKT, KT, LG U+** 통신 3사는 모두 **가족 결합 할인** 제도를 운영하고 있습니다. **인터넷 가입** 시 본인과 가족 구성원들이 사용하는 휴대폰 통신사를 확인하여, 결합 할인 혜택을 받는 것이 가장 중요합니다. 예를 들어, **SKT**의 **온가족 할인**은 가족 합산 가입 연수에 따라 **인터넷 요금**을 최대 50%까지 할인받을 수 있습니다. **동작구** 지역에서 거주하며 가족 구성원이 많다면 반드시 이 혜택을 활용하여 **월평균 요금**을 절감하세요.</p>
+      <img src="https://images.pexels.com/photos/5926394/pexels-photo-5926394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="인터넷 설치 기사 이미지" class="full-width-image">
+      <p class="image-caption">인터넷 설치 기사가 광케이블을 확인하는 모습 (이미지 출처: Pexels.com)</p>
+
+      <h3>✅ '제휴 카드' 할인도 꼼꼼히 체크!</h3>
+      <p>통신사들은 카드사와 제휴하여 **인터넷 요금** 자동이체 시 할인 혜택을 제공합니다. 제휴 카드 사용 시 전월 실적에 따라 매월 1만 5천 원에서 2만 원까지 할인을 받을 수 있습니다. **인터넷 비용**을 절약하는 또 다른 방법입니다. **동작구** 지역의 **신규 가입** 고객이라면 이 혜택을 놓치지 마세요. 단, **제휴 카드 할인**과 **가족 결합 할인**은 중복이 안되는 경우가 있으므로, 상담 시 **장단점**을 비교하여 어떤 **할인 혜택**이 더 큰지 확인해야 합니다.</p>
+      <a href="https://www.ftc.go.kr/www/sub/contents.do?key=264" target="_blank" rel="noopener noreferrer" class="external-link">공정거래위원회에서 통신 서비스 분야 소비자 보호지침 확인하기</a>
+
+      <h3>✅ 불필요한 사은품 대신 현금지원 선택하기</h3>
+      <p>일부 **인터넷 업체**는 고가이지만 쓸모없는 가전제품을 **사은품**으로 제시하며 고객을 현혹합니다. 하지만 **한국소비자원**의 조사 결과에 따르면, **현금지원**을 받는 것이 소비자에게 가장 합리적인 선택으로 밝혀졌습니다. **인터넷 가입** 시 **현금지원**을 받는 것이 **이사 비용**이나 **생활비**에 직접적인 도움이 되기 때문입니다. 저희 **동작구인터넷 가입센터**는 **사은품 순위**에서 항상 상위에 있는 **현금지원**을 약속하며, 이를 통해 고객님의 만족도를 높이고 있습니다.</p>
+      <a href="https://www.kca.go.kr/home/main.do" target="_blank" rel="noopener noreferrer" class="external-link">한국소비자원 홈페이지에서 인터넷 서비스 관련 소비자 피해 사례 확인하기</a>
+
+      <h3>✅ 약정 기간과 위약금 규정 확인</h3>
+      <p>**인터넷 가입**은 보통 3년 약정으로 진행됩니다. 약정 기간 내에 해지하면 **위약금**이 발생합니다. **동작구**로 **이사**를 오거나 나갈 때, 기존 통신사의 **인터넷 위약금**이 얼마인지 정확히 확인해야 합니다. 특히 **원룸 이사**가 잦은 **노량진** 지역의 경우, 단기 약정 상품을 고려하는 것이 유리할 수 있습니다. **인터넷 약정 기간**이 1년 이하로 남았다면 **재약정**을 통해 **사은품**을 받는 것이 유리할 수도 있습니다. 전문가와 상담하여 **재약정**과 **신규 가입**의 **장단점**을 비교해 보세요.</p>
+
+      <h3>✅ 동작구인터넷 설치 후기 및 순위 확인</h3>
+      <p>인터넷 설치 후기는 해당 업체의 서비스 품질을 가늠하는 중요한 척도입니다. **동작구** 지역에서 실제로 **인터넷 설치**를 받은 고객들의 **내돈내산 후기**를 확인해 보세요. **네이버 블로그**나 **맘카페** 등에서 해당 업체의 **서비스 순위**와 **평가**를 미리 확인하는 것이 좋습니다. 저희 플랫폼은 **AI**를 활용하여 고객 **만족도 순위**를 실시간으로 업데이트하며, 불만족 후기가 많은 업체는 제휴에서 제외합니다.</p>
+
+    </section>
+
+    <section id="자주묻는질문">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 동작구에서 SKT, KT, LG U+ 중 어떤 통신사를 선택해야 하나요?</strong></dt>
+        <dd>A. **통신사 선택**은 고객님의 상황에 따라 달라집니다. **SKT**는 가족 구성원이 SKT 휴대폰을 사용하는 경우 **가족 결합 할인**이 강력합니다. **KT**는 전국적으로 가장 안정적인 **인터넷 속도**와 넓은 커버리지를 자랑합니다. **LG U+**는 **인터넷 TV 결합** 상품의 콘텐츠가 풍부하여 OTT 서비스를 많이 이용하는 고객에게 유리합니다. **동작구인터넷** 가입 시 저희가 고객님의 환경을 분석하여 **장단점**을 비교해 드립니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인터넷 설치 시 사은품은 언제 받을 수 있나요?</strong></dt>
+        <dd>A. **사은품** 및 **현금지원금**은 통신사 본사 정책과 대리점 규정에 따라 **인터넷 설치** 완료 후 7일 이내에 지급되는 것이 일반적입니다. 저희 **동작구인터넷 가입센터**는 계약서에 **지급일**을 명확히 명시하고, 약속된 일정에 맞춰 지급을 완료합니다. **사은품 순위**에서 상위권을 차지하는 이유는 이러한 투명성 때문입니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 동작구 원룸에 거주하는데, 기가 인터넷이 필요한가요?</strong></dt>
+        <dd>A. **원룸 인터넷 가입**의 경우, 1인 가구는 보통 100Mbps 상품만으로도 충분합니다. **기가 인터넷**(500Mbps 이상)은 고사양 온라인 게임이나 대용량 파일 업로드가 잦은 경우에 추천합니다. **동작구** 지역의 **원룸 인터넷 비용**은 100Mbps와 기가 인터넷 간에 월 1만 원 내외의 **가격 차이**가 있으므로, **인터넷 속도**와 사용량을 고려하여 합리적인 선택을 하는 것이 중요합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 동작구로 이사 예정인데, 인터넷 이사 설치도 가능한가요?</strong></dt>
+        <dd>A. 네, 가능합니다. **인터넷 이사**는 기존 통신사를 해지하지 않고 새로운 거주지(**동작구**)로 인터넷을 이전 설치하는 것입니다. 이 경우 **인터넷 위약금**이 발생하지 않고, 기존 약정을 유지할 수 있습니다. **인터넷 이사 설치 비용**은 통신사별로 상이하므로 사전에 확인해 드립니다.</dd>
+        
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인터넷 가입 시 현금지원금액이 업체마다 다른 이유는 무엇인가요?</strong></dt>
+        <dd>A. 통신사 본사에서 대리점에 지급하는 마케팅 비용은 정해져 있지만, 대리점별로 자체적으로 마진을 줄여 **현금지원금**을 높이거나, 다른 사은품을 추가하여 **가입 혜택**을 차별화합니다. 저희 **동작구인터넷 가입센터**는 **AI 에이전트**를 통해 실시간으로 **사은품 순위**를 비교하여 고객님께 **최대 현금지원**을 약속하는 **저렴한곳**을 추천해 드립니다.</dd>
+      </dl>
+    </section>
+    
+    <section id="상담신청">
+      <h2>동작구인터넷 가입 상담 신청 (AI 추천 시스템)</h2>
+      <p>**동작구인터넷 가입센터**를 통해 고객님의 **인터넷 비용**을 획기적으로 절감하고 **사은품 혜택**을 극대화하세요. **사당동, 상도동, 흑석동, 노량진동** 등 동작구 전 지역을 대상으로 **AI** 기반의 맞춤형 **인터넷 추천** 서비스를 제공합니다. 지금 바로 신청하시면 전문 상담사가 **SKT, KT, LG U+**의 **장단점**을 상세히 비교 분석하여 최적의 상품을 안내해 드립니다.</p>
+      <img src="https://images.pexels.com/photos/4005892/pexels-photo-4005892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="인터넷 가입 상담 이미지" class="full-width-image">
+      <p class="image-caption">전문 상담사와 함께 인터넷 요금제를 비교하는 모습 (이미지 출처: Pexels.com)</p>
+      <div class="form-section">
+          <h3>동작구 인터넷 가입 1:1 맞춤 상담 신청</h3>
+          <form id="consultationForm">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" required>
+
+              <label for="contactNumber">연락처</label>
+              <input type="text" id="contactNumber" name="contactNumber" placeholder="'-' 없이 숫자만 입력" required>
+
+              <label for="movingDate">이사/설치 희망 날짜</label>
+              <input type="text" id="movingDate" name="movingDate" placeholder="예: 2026년 5월 10일">
+
+              <label for="currentProvider">현재 사용 중인 통신사 (선택 사항)</label>
+              <select id="currentProvider" name="currentProvider">
+                  <option value="">-- 선택 안함 --</option>
+                  <option value="skt">SKT</option>
+                  <option value="kt">KT</option>
+                  <option value="lg">LG U+</option>
+                  <option value="other">기타</option>
+              </select>
+
+              <label for="comments">상담 내용 (요청 사항 또는 질문)</label>
+              <textarea id="comments" name="comments" rows="4"></textarea>
+
+              <button type="submit">상담 신청하기</button>
+          </form>
+      </div>
+      <p>저희 **동작구인터넷 가입센터**는 **네이버**나 **구글** 검색 결과에서 **웹사이트 영역**과 **스니펫** 상위 노출을 위해 끊임없이 노력하고 있습니다. 고객님의 만족이 곧 저희의 목표입니다. **동작구** 지역에서 가장 **저렴한** **인터넷 비용**으로 최대 **현금지원**을 받으세요.</p>
+      <p><strong>전화:</strong> 050-1234-5678</p>
+    </section>
+
     </main>
-  </body>
-</html>
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const expanded = dt.getAttribute('aria-expanded') === 'true' || false;
+        dt.setAttribute('aria-expanded', !expanded);
+        dt.classList.toggle('active');
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
